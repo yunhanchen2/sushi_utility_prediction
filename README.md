@@ -10,8 +10,7 @@ $$
 \max_{S \subseteq [n],\ |S| \leq k} \ \mathbb{E}_{l} [ r(l, S) ]
 $$
 
-where
-
+where, 
 $$
 d(l, S) = \min \left\{ i \in [m] \;\middle|\; l_i \in S \right\}
 $$
