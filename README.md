@@ -11,10 +11,13 @@ $$
 $$
 
 where
+
 \[
 d(l, S) = \min \left\{ i \in [m] \;\middle|\; l_i \in S \right\}
 \]
+
 then,
+
 \[
 r(l, S) = r_{d(l, S)} = \frac{10}{d(l, S)}
 \]
