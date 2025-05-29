@@ -10,9 +10,14 @@ $$
 \max_{S \subseteq [n],\ |S| \leq k} \ \mathbb{E}_{l} [ r(l, S) ]
 $$
 
-where  
-$r(l, S) = 1$ if $\{l_1, ..., l_n\} \cap S \neq \emptyset$,  
-and $r(l, S) = 0$ otherwise.
+where 
+$$
+d(l, S) = \min \left\{ i \in [m] \;\middle|\; l_i \in S \right\}
+$$
+then, 
+$$
+r(l, S) = r_{d(l, S)} = \frac{10}{d(l, S)}
+$$
 
 *(p.s. Here we use the data of `sushi_a`, which containing data id only from 0–9 and n = 10.)*
 
