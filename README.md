@@ -13,7 +13,7 @@ $$
 where,  
 
 $$
-d(l, S) = \min \left\{ i \in [m] \;\big| \; l_i \in S \right\}
+$d(l, S) = \min \{ i \in [m] \mid l_i \in S \}$
 $$
 
 then,  
