@@ -11,10 +11,10 @@ $$
 $$
 
 where, 
+
 $$
 d(l, S) = \min \left\{ i \in [m] \;\middle|\; l_i \in S \right\}
 $$
-
 then,
 
 $$
