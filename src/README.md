@@ -2,20 +2,26 @@
 
 ### Optimal Solution
 
-1. **The plot of the original optimal solution (`original_graph.py`)**
+1. **The plot of the optimal solution for a input file(`get_opt.py`)**
 
    - **Description:**  
-     This script plot the revenue on the primary data for the optimal solutions obtained from different sample sizes, given a specific sushi supply quantity k. 
+     This script plot the revenue on the primary data for the optimal solutions obtained from different sample sizes in a file, given a specific sushi supply quantity k. 
 
-     **Input:** number(k) of sushi provided to the custome; The axis start, end, and interval of the plot
+     **Input:** The file name; The number(k) of sushi provided to the custome; The axis start, end, and interval of the plot
 
      **Output:** a graph (also the optimal solution for each cases)
    - **Running Instruction:**  
      Run the script using:
      ```
-     python3 original_graph.py
+     python3 get_opt.py
      ```
      After executing, the terminal will prompt:
+     ```
+     Enter the filename:
+     ```
+     You can input a number like `5000_a.txt`, etc.
+     
+     Then, the terminal will prompt:
      ```
      How many sushi do you want to serve customers? (not more than 10): 
      ```
