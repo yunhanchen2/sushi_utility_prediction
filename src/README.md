@@ -29,7 +29,7 @@
      You can input a number like (`1`, `5000`, `1`), etc.
 
    - **Logic of the code:**
-     ![Plot](images/code_logic1.png)
+     ![Plot](../images/code_logic1.png)
      
 2. **0 shot LLM Generation (`gpt_persona_0_shot.py`)**
 
