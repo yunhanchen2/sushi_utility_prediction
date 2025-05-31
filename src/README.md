@@ -38,7 +38,8 @@
    - **Logic of the code:**
      ![Plot](../images/code_logic1.png)
      
-2. ** The plot of the optimal solution for primary data, random ranking and 0-shot LLM generated data(`combine_origin.py`)**
+     
+2. **The plot of the optimal solution for primary data, random ranking and 0-shot LLM generated data(`combine_origin.py`)**
    - **Description:**  
      This is a stronger mode of `get_opt.py`. This script plot the revenue on the primary data for the optimal solutions obtained from different sample sizes in 3 files(primary data, random ranking and 0-shot LLM generated data), given a specific sushi supply quantity k. 
 
