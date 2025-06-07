@@ -16,20 +16,18 @@ def load_sushi_features(path):
         return [line.strip().split() for line in f]
 
 #change numbers to text
-minor_group_map = {
+minor_group_map={
     "0": "aomono (blue-skinned fish)", "1": "akami (red meat fish)", "2": "shiromi (white-meat fish)",
     "3": "tare (eel sauce)", "4": "clam or shell", "5": "squid or octopus", "6": "shrimp or crab",
-    "7": "roe", "8": "other seafood", "9": "egg", "10": "meat", "11": "vegetable"
-}
+    "7": "roe", "8": "other seafood", "9": "egg", "10": "meat", "11": "vegetable"}
 
 def user_to_text(user):
     # maps
-    age_map = {
+    age_map={
         "0": "15–19", "1": "20–29", "2": "30–39",
-        "3": "40–49", "4": "50–59", "5": "60+"
-    }
+        "3": "40–49", "4": "50–59", "5": "60+"}
 
-    prefecture_map = {
+    prefecture_map= {
         "0": "Hokkaido", "1": "Aomori", "2": "Iwate", "3": "Akita", "4": "Miyagi", "5": "Yamagata",
         "6": "Fukushima", "7": "Niigata", "8": "Ibaraki", "9": "Tochigi", "10": "Gunma", "11": "Saitama",
         "12": "Chiba", "13": "Tokyo", "14": "Kanagawa", "15": "Yamanashi", "16": "Shizuoka", "17": "Nagano",
@@ -41,26 +39,26 @@ def user_to_text(user):
         "45": "Oita", "46": "Okinawa", "47": "foreign countries"
     }
 
-    region_map = {
+    region_map={
         "0": "Hokkaido", "1": "Tohoku", "2": "Hokuriku", "3": "Kanto and Shizuoka",
         "4": "Nagano and Yamanashi", "5": "Chukyo", "6": "Kinki", "7": "Chugoku",
-        "8": "Shikoku", "9": "Kyushu", "10": "Okinawa", "11": "Foreign"
-    }
+        "8": "Shikoku", "9": "Kyushu", "10": "Okinawa", "11": "Foreign"}
 
     eastwest_map = {"0": "Eastern Japan", "1": "Western Japan"}
 
-    uid = user[0]
-    gender = "male" if user[1] == "0" else "female"
-    age = age_map.get(user[2], "invalid age")
+    uid= user[0]
+    gender="male" if user[1] == "0" else "female"
+    age=age_map.get(user[2], "invalid age")
 
-    childhood_pref = prefecture_map.get(user[4], f"Prefecture {user[4]}")
-    childhood_region = region_map.get(user[5], f"Region {user[5]}")
-    childhood_side = eastwest_map.get(user[6], f"Area {user[6]}")
+    childhood_pref= prefecture_map.get(user[4], f"Prefecture {user[4]}")
+    childhood_region= region_map.get(user[5], f"Region {user[5]}")
+    childhood_side= eastwest_map.get(user[6], f"Area {user[6]}")
 
-    current_pref = prefecture_map.get(user[7], f"Prefecture {user[7]}")
-    current_region = region_map.get(user[8], f"Region {user[8]}")
-    current_side = eastwest_map.get(user[9], f"Area {user[9]}")
+    current_pref= prefecture_map.get(user[7], f"Prefecture {user[7]}")
+    current_region= region_map.get(user[8], f"Region {user[8]}")
+    current_side= eastwest_map.get(user[9], f"Area {user[9]}")
 
+    #checking whether change the region
     if user[10] == "0":
         return (
             f"User {uid} is a {gender} aged {age}. "
@@ -74,10 +72,11 @@ def user_to_text(user):
         )
 
 def sushi_to_text(sushi):
-    style = "a maki roll" if sushi[2] == "0" else "a non-maki type"
-    major = "seafood" if sushi[3] == "0" else "non-seafood"
-    minor = minor_group_map.get(sushi[4], "unknown group")
+    style="a maki roll" if sushi[2] == "0" else "a non-maki type"
+    major= "seafood" if sushi[3] == "0" else "non-seafood"
+    minor= minor_group_map.get(sushi[4], "unknown group")
 
+    #divide the value of score to text
     taste_score = float(sushi[5])
     if taste_score <= 0.8:
         taste = "very heavy in taste"
@@ -100,9 +99,9 @@ def sushi_to_text(sushi):
     else:
         freq = "very frequently eaten"
 
-    price = float(sushi[7])
+    price= float(sushi[7])
 
-    availability = float(sushi[8])
+    availability= float(sushi[8])
 
     if availability < 0.25:
         availability_text = "very rarely found in sushi restaurants"
@@ -121,9 +120,9 @@ def sushi_to_text(sushi):
 
 # make prompts and call GPT
 def build_prompt(user_row, sushi_rows):
-    user_text = user_to_text(user_row)
+    user_text =user_to_text(user_row)
 
-    sushi_rows = sushi_rows.copy()
+    sushi_rows =sushi_rows.copy()
     random.shuffle(sushi_rows)
 
     sushi_info = "\n".join([sushi_to_text(s) for s in sushi_rows])
@@ -168,25 +167,25 @@ def get_gpt_ranking(prompt):
 
 # main func read file ---> construct GPT ---> generate data ---> store the data
 def main():
-    user_file = "sushi_u.txt"
-    sushi_file = "sushi_i_a.txt"
-    output_txt = "sushi_ranking.txt"
-    sushi_count = 10
+    user_file="sushi_u.txt"
+    sushi_file="sushi_i_a.txt"
+    output_txt="sushi_ranking.txt"
+    sushi_count=10
 
     # load data
-    users = load_user_features(user_file)
-    sushis = load_sushi_features(sushi_file)
+    users=load_user_features(user_file)
+    sushis=load_sushi_features(sushi_file)
 
     # generate the data
     with open(output_txt, "w", encoding="utf-8") as out:
         for user in tqdm(users):
-            prompt = build_prompt(user, sushis) 
+            prompt= build_prompt(user, sushis) 
             try:
                 ranking = get_gpt_ranking(prompt)
                 valid_ids = []
                 for x in ranking.split():
                     if x.isdigit():
-                        val = int(x)
+                        val= int(x)
                         if 0 <= val <= 9 and val not in valid_ids:
                             valid_ids.append(val)
                         if len(valid_ids) == 10:
