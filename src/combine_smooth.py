@@ -4,15 +4,15 @@ import matplotlib.pyplot as plt
 from collections import Counter
 
 def load_preferences(filename):
-    preferences = []
+    preferences=[]
     with open(filename, 'r') as f:
         for line in f:
-            ranking = list(map(int, line.strip().split()))
+            ranking=list(map(int, line.strip().split()))
             preferences.append(ranking)
     return preferences
 
 def compute_reward(S, preferences):
-    total_reward = 0
+    total_reward=0
     for pref in preferences:
         for i, sushi in enumerate(pref):
             if sushi in S:
@@ -33,27 +33,24 @@ def find_best_assortment(preferences, k, n):
     return best_S
 
 def evaluate_rewards_over_sample_sizes(filename, k, sample_sizes, primary_data):
-    full_preferences = load_preferences(filename)
-    num_trials = 30
-    reward_matrix = []
-
-    for trial in range(num_trials):
+    full_preferences= load_preferences(filename)
+    num_of_trials=30
+    reward=[]
+    
+    for trial in range(num_of_trials):
         random.shuffle(full_preferences) 
-        trial_rewards = []
-
+        trial_rewards=[]
         for sample_size in range(1, sample_sizes + 1):
-            sampled = full_preferences[:sample_size]
-            best_S = find_best_assortment(sampled, k, 10)
-            reward = compute_reward(best_S, primary_data)
+            sampled= full_preferences[:sample_size]
+            best_S= find_best_assortment(sampled, k, 10)
+            reward= compute_reward(best_S, primary_data)
             trial_rewards.append(reward)
+        reward.append(trial_rewards)
 
-        reward_matrix.append(trial_rewards)
-
-    avg_rewards = []
-
+    avg_rewards=[]
     for i in range(sample_sizes):  
         total = 0
-        for trial in reward_matrix: 
+        for trial in reward: 
             total += trial[i]       
         average = total / num_trials
         avg_rewards.append(average)
@@ -69,7 +66,7 @@ def main():
     primary_data = load_preferences("5000_a.txt")
 
     for filename in filenames:
-        rewards = evaluate_rewards_over_sample_sizes(filename, k, max_sample_size, primary_data)
+        rewards= evaluate_rewards_over_sample_sizes(filename, k, max_sample_size, primary_data)
         plt.plot(range(1, max_sample_size + 1), rewards, label=filename)
 
     plt.xlabel("Sample Size")
