@@ -1,4 +1,6 @@
 ## Code Files Description
+### Data generation
+1. **The plot of the optimal solution for a input file(`get_opt.py`)**
 
 ### Optimal Solution
 
